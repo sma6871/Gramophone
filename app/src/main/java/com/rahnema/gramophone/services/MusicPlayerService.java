@@ -14,13 +14,14 @@ import android.util.Log;
 import com.rahnema.gramophone.models.Song;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MusicPlayerService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnCompletionListener,
         MediaPlayer.OnErrorListener {
 
     private static final String ACTION_PLAY = "com.example.action.PLAY";
     MediaPlayer mMediaPlayer = null;
-    private ArrayList<Song> songs;
+    private List<Song> songs;
 
     int songPosn;
     Song currentSong;
@@ -64,7 +65,7 @@ public class MusicPlayerService extends Service implements MediaPlayer.OnPrepare
         mMediaPlayer.setOnPreparedListener(this);
     }
 
-    public void setList(ArrayList<Song> theSongs) {
+    public void setList(List<Song> theSongs) {
         songs = theSongs;
     }
 
@@ -159,7 +160,9 @@ public class MusicPlayerService extends Service implements MediaPlayer.OnPrepare
     public void playSong() {
         mMediaPlayer.reset();
 
-        long currSong = currentSong.getId();
+        Song playSong = songs.get(songPosn);
+        long currSong = playSong.getId();
+
 
         Uri trackUri = ContentUris.withAppendedId(
                 android.provider.MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,

@@ -80,6 +80,16 @@
         android:gravity="center">
 
         <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabPrev"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tint="#fff"
+            app:elevation="4dp"
+            app:fabSize="auto"
+            app:srcCompat="@drawable/ic_skip_previous_black_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
             android:id="@+id/fabPlay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,6 +110,19 @@
             app:fabSize="auto"
             app:backgroundTint="@color/fabDisableColor"
             app:srcCompat="@drawable/ic_loop_black_24dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fabNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:tint="#fff"
+            app:elevation="4dp"
+            app:fabSize="auto"
+            android:layout_margin="@dimen/padding_small"
+            app:srcCompat="@drawable/ic_skip_next_black_24dp" />
+
+
     </LinearLayout>
 </LinearLayout>
 </FrameLayout>

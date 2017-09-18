@@ -38,7 +38,7 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
     private Intent playIntent;
     private boolean musicBound = false;
     //activity and playback pause flags
-    private boolean paused=false, playbackPaused=false;
+    private boolean paused = false, playbackPaused = false;
 
     MusicPlayerFragment musicPlayerFragment;
 
@@ -120,6 +120,27 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
         musicSrv.seekTo(progress);
     }
 
+    @Override
+    public void onPrevClick() {
+        musicSrv.playPrev();
+    }
+
+    @Override
+    public void onNextClick() {
+        musicSrv.playNext();
+    }
+
+    //user song select
+    public void songPicked(View view){
+        musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
+        musicSrv.playSong();
+        if(playbackPaused){
+
+            playbackPaused=false;
+        }
+
+    }
+
     //connect to the service
     private ServiceConnection musicConnection = new ServiceConnection() {
 
@@ -130,7 +151,7 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
             musicSrv = binder.getService();
             musicSrv.setListener(MainActivity.this);
             //pass list
-            musicSrv.setCurrentSong(currentSong);
+            musicSrv.setList(MusicListFragment.ITEM_MAP);
             musicBound = true;
         }
 
@@ -170,6 +191,7 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
 
         }
     }
+
 
     @Override
     protected void onResume() {

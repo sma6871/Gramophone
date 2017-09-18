@@ -158,6 +158,21 @@ public class MusicPlayerFragment extends BaseFragment {
         }
     }
 
+    @OnClick(R.id.fabNext)
+    public void onNextPressed() {
+        if (mListener != null) {
+            mListener.onNextClick();
+
+        }
+    }
+    @OnClick(R.id.fabNext)
+    public void onPrevPressed() {
+        if (mListener != null) {
+            mListener.onPrevClick();
+
+        }
+    }
+
 
     private void toggleLoopIcon() {
         if (isLoopEnable) {
@@ -211,5 +226,9 @@ public class MusicPlayerFragment extends BaseFragment {
         long refreshPos();
 
         void seekTo(int progress);
+
+        void onPrevClick();
+
+        void onNextClick();
     }
 }

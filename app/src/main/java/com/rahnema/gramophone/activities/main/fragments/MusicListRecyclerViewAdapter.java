@@ -60,6 +60,7 @@ public class MusicListRecyclerViewAdapter extends RecyclerView.Adapter<MusicList
         holder.artist.setText(song.getArtistName());
         holder.title.setText(song.getTitle());
 
+        holder.mView.setTag(position);
 
         Observable.fromCallable(() -> Utils.getAlbumArtBitmap(context, song.getAlbumId()))
                 .subscribeOn(Schedulers.io())
