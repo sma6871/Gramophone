@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_bourse"
+        android:icon="@drawable/ic_stars_black_24dp"
+        android:title="@string/menu_bourse" />
+
+    <item
+        android:id="@+id/navigation_safe_gardoon"
+        android:icon="@drawable/ic_adjust_black_24dp"
+        android:title="@string/menu_safe_gardoon" />
+
+    <item
+        android:id="@+id/navigation_dast_aval"
+        android:icon="@drawable/ic_music_note_black_24dp"
+        android:title="@string/menu_dast_aval" />
+
+</menu>

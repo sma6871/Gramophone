@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Gramophone</string>
+    <string name="menu_bourse">روبورس</string>
+    <string name="menu_safe_gardoon">صفحه گردون</string>
+    <string name="menu_dast_aval">دست اول</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
