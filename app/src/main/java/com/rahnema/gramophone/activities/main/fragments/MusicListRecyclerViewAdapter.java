@@ -1,9 +1,6 @@
 package com.rahnema.gramophone.activities.main.fragments;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +16,6 @@ import com.rahnema.gramophone.ext.Utils;
 import com.rahnema.gramophone.models.Song;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,11 +62,13 @@ public class MusicListRecyclerViewAdapter extends RecyclerView.Adapter<MusicList
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe((result) -> {
-                    Glide.with(context)
-                            .load(result)
-                            .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .centerCrop()
-                            .into(holder.imgCover);
+                    if (result != null
+                            && !result.equals(""))
+                        Glide.with(context)
+                                .load(result)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .centerCrop()
+                                .into(holder.imgCover);
                 });
 
 

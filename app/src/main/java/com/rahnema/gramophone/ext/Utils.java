@@ -2,15 +2,11 @@ package com.rahnema.gramophone.ext;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.provider.MediaStore;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
-import java.io.File;
 
 /**
  * @author Payam1991 on 9/18/2017.
@@ -62,6 +58,6 @@ public class Utils {
         if(albumArt != null) {
             return albumArt;
         }
-        return null;
+        return "";
     }
 }
