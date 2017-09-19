@@ -1,16 +1,15 @@
 package com.rahnema.gramophone.activities.main;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -24,8 +23,8 @@ import com.rahnema.gramophone.ext.ActivityUtils;
 import com.rahnema.gramophone.ext.BundleExtraKeys;
 import com.rahnema.gramophone.models.Song;
 import com.rahnema.gramophone.services.MusicPlayerService;
+import com.tedpark.tedpermission.rx2.TedRx2Permission;
 
-import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import butterknife.BindView;
@@ -61,6 +60,27 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
     public void onViewReady(@Nullable Bundle savedInstanceState, Intent intent) {
         super.onViewReady(savedInstanceState, intent);
 
+        TedRx2Permission.with(this)
+                .setRationaleTitle(R.string.rationale_title)
+                .setRationaleMessage(R.string.rationale_message) // "we need permission for read contact and find your location"
+                .setPermissions(Manifest.permission.READ_EXTERNAL_STORAGE)
+                .request()
+                .subscribe(tedPermissionResult -> {
+                    if (tedPermissionResult.isGranted()) {
+                        showMessage(MessageType.Info, "Permission Granted");
+                        init();
+                    } else {
+                        showMessage(MessageType.Error,
+                                "Permission Denied\n" + tedPermissionResult.getDeniedPermissions().toString());
+                        finish();
+                    }
+                }, throwable -> {
+                }, () -> {
+                });
+
+    }
+
+    void init() {
         musicPlayerFragment = new MusicPlayerFragment();
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
@@ -131,12 +151,12 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
     }
 
     //user song select
-    public void songPicked(View view){
+    public void songPicked(View view) {
         musicSrv.setSong(Integer.parseInt(view.getTag().toString()));
         musicSrv.playSong();
-        if(playbackPaused){
+        if (playbackPaused) {
 
-            playbackPaused=false;
+            playbackPaused = false;
         }
 
     }
