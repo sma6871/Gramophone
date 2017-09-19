@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,7 +62,6 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
     @Override
     public void onViewReady(@Nullable Bundle savedInstanceState, Intent intent) {
         super.onViewReady(savedInstanceState, intent);
-
         TedRx2Permission.with(this)
                 .setRationaleTitle(R.string.rationale_title)
                 .setRationaleMessage(R.string.rationale_message) // "we need permission for read contact and find your location"
@@ -89,6 +91,22 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), new MusicListFragment(), R.id.listFragment, false);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
         switch (item.getItemId()) {
@@ -100,7 +118,6 @@ public class MainActivity extends BaseActivity implements MusicListFragment.OnLi
                 return true;
             case R.id.navigation_dast_aval:
                 showMessage(MessageType.Info, R.string.menu_dast_aval);
-                startActivity(new Intent(this, AboutActivity.class));
                 return true;
         }
         return false;
